@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0f172a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0d1117;--bg2:#161b22;--bg3:#1c2333;--bg4:#21262d;
@@ -21,47 +21,50 @@
   --purple:#bc8cff;--purple-bg:#1a1033;
   --teal:#39d353;--teal-bg:#0b2d1a;
   --radius:8px;--radius-lg:12px;--radius-xl:16px;
-  --mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif;--serif:'Fraunces',serif;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Inter',sans-serif;
+  --serif:'Playfair Display',serif;
+  --fs:16px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15px;min-height:100vh;line-height:1.6;}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:var(--fs);min-height:100vh;line-height:1.65;}
 #app{display:flex;min-height:100vh;}
-#sidebar{width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;}
+#sidebar{width:252px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;}
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-#topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-#content{flex:1;padding:28px;overflow-y:auto;}
-.sidebar-header{padding:20px 16px 12px;border-bottom:1px solid var(--border);}
-.sidebar-logo{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--txt);}
+#topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+#content{flex:1;padding:32px;overflow-y:auto;}
+.sidebar-header{padding:22px 18px 14px;border-bottom:1px solid var(--border);}
+.sidebar-logo{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--txt);}
 .sidebar-logo span{color:var(--accent);}
-.sidebar-sub{font-size:11px;color:var(--txt3);margin-top:2px;font-family:var(--mono);}
-.sidebar-section{padding:8px 8px 4px;font-size:10px;font-weight:500;color:var(--txt3);text-transform:uppercase;letter-spacing:1px;margin-top:8px;}
-.nav-item{display:flex;align-items:center;gap:10px;padding:8px 12px;margin:1px 8px;border-radius:var(--radius);cursor:pointer;color:var(--txt2);font-size:13.5px;transition:all .15s;border:none;background:none;width:calc(100% - 16px);text-align:left;}
+.sidebar-sub{font-size:12px;color:var(--txt3);margin-top:3px;font-family:var(--mono);}
+.sidebar-section{padding:10px 10px 4px;font-size:11px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:1px;margin-top:8px;}
+.nav-item{display:flex;align-items:center;gap:11px;padding:9px 13px;margin:1px 8px;border-radius:var(--radius);cursor:pointer;color:var(--txt2);font-size:15px;transition:all .15s;border:none;background:none;width:calc(100% - 16px);text-align:left;}
 .nav-item:hover{background:var(--bg3);color:var(--txt);}
 .nav-item.active{background:var(--accent-bg);color:var(--accent);}
-.nav-icon{font-size:16px;flex-shrink:0;}
-.sidebar-footer{margin-top:auto;padding:12px 8px;border-top:1px solid var(--border);}
-.vehicle-picker{padding:8px;border-bottom:1px solid var(--border);}
-.vehicle-picker select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--txt);padding:7px 10px;font-size:12px;font-family:var(--sans);cursor:pointer;}
-.topbar-title{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--txt);}
-.topbar-actions{display:flex;gap:8px;align-items:center;}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius);font-size:13px;font-family:var(--sans);cursor:pointer;border:1px solid var(--border);background:var(--bg3);color:var(--txt2);transition:all .15s;}
+.nav-icon{font-size:17px;flex-shrink:0;}
+.sidebar-footer{margin-top:auto;padding:14px 10px;border-top:1px solid var(--border);}
+.vehicle-picker{padding:10px;border-bottom:1px solid var(--border);}
+.vehicle-picker select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--txt);padding:8px 11px;font-size:13px;font-family:var(--sans);cursor:pointer;}
+.topbar-title{font-family:var(--serif);font-size:19px;font-weight:500;color:var(--txt);}
+.topbar-actions{display:flex;gap:10px;align-items:center;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:var(--radius);font-size:14px;font-family:var(--sans);cursor:pointer;border:1px solid var(--border);background:var(--bg3);color:var(--txt2);transition:all .15s;font-weight:500;}
 .btn:hover{border-color:var(--border2);color:var(--txt);}
 .btn-primary{background:var(--accent2);border-color:var(--accent2);color:#fff;}
 .btn-primary:hover{background:#388bfd;border-color:#388bfd;color:#fff;}
 .btn-danger{background:var(--red-bg);border-color:var(--red);color:var(--red);}
-.btn-sm{padding:5px 10px;font-size:12px;}
-.btn-icon{padding:7px;gap:0;}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
-.card-title{font-family:var(--serif);font-size:15px;font-weight:500;}
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
-.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;}
-.stat{background:var(--bg3);border-radius:var(--radius);padding:16px;border:1px solid var(--border);}
-.stat-label{font-size:11px;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-family:var(--mono);}
-.stat-value{font-size:22px;font-weight:500;font-family:var(--mono);}
-.stat-sub{font-size:12px;color:var(--txt2);margin-top:2px;}
-.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;}
+.btn-sm{padding:6px 12px;font-size:13px;}
+.btn-icon{padding:8px;gap:0;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.card-title{font-family:var(--serif);font-size:17px;font-weight:500;}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;}
+.stat{background:var(--bg3);border-radius:var(--radius);padding:18px;border:1px solid var(--border);}
+.stat-label{font-size:12px;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;font-family:var(--mono);}
+.stat-value{font-size:24px;font-weight:600;font-family:var(--mono);}
+.stat-sub{font-size:13px;color:var(--txt2);margin-top:3px;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:500;}
 .badge-green{background:var(--green-bg);color:var(--green);border:1px solid #1a4731;}
 .badge-orange{background:var(--orange-bg);color:var(--orange);border:1px solid #3d2e08;}
 .badge-red{background:var(--red-bg);color:var(--red);border:1px solid #4d1c1c;}
@@ -71,70 +74,82 @@ body{background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15p
 .badge-teal{background:var(--teal-bg);color:var(--teal);border:1px solid #1a4d2a;}
 .table-wrap{overflow-x:auto;border-radius:var(--radius-lg);border:1px solid var(--border);}
 table{width:100%;border-collapse:collapse;}
-th{background:var(--bg3);padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono);border-bottom:1px solid var(--border);}
-td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:13.5px;color:var(--txt);}
+th{background:var(--bg3);padding:11px 15px;text-align:left;font-size:12px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono);border-bottom:1px solid var(--border);}
+td{padding:11px 15px;border-bottom:1px solid var(--border);font-size:15px;color:var(--txt);}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:var(--bg3);}
-.td-mono{font-family:var(--mono);font-size:13px;}
+.td-mono{font-family:var(--mono);font-size:14px;}
 .td-muted{color:var(--txt2);}
-.form-group{margin-bottom:14px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
-label{display:block;font-size:12px;color:var(--txt2);margin-bottom:5px;font-family:var(--mono);}
-input,select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--txt);padding:8px 12px;font-size:13.5px;font-family:var(--sans);}
+.form-group{margin-bottom:16px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+label{display:block;font-size:13px;color:var(--txt2);margin-bottom:6px;font-family:var(--mono);font-weight:500;}
+input,select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--txt);padding:9px 13px;font-size:15px;font-family:var(--sans);}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(88,166,255,.12);}
 input[readonly]{color:var(--txt2);}
 textarea{resize:vertical;min-height:80px;}
 select option{background:var(--bg3);}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;}
-.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-xl);padding:28px;width:100%;max-width:660px;max-height:90vh;overflow-y:auto;}
-.modal-lg{max-width:800px;}
-.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
-.modal-title{font-family:var(--serif);font-size:18px;font-weight:500;}
-.modal-close{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:20px;padding:4px;line-height:1;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-xl);padding:30px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;}
+.modal-lg{max-width:820px;}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+.modal-title{font-family:var(--serif);font-size:20px;font-weight:500;}
+.modal-close{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:22px;padding:4px;line-height:1;}
 .modal-close:hover{color:var(--txt);}
-.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);}
-.tipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
-.tipo-btn{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 8px;text-align:center;cursor:pointer;transition:all .15s;}
+.modal-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;padding-top:18px;border-top:1px solid var(--border);}
+.tipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px;}
+.tipo-btn{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 10px;text-align:center;cursor:pointer;transition:all .15s;}
 .tipo-btn:hover{border-color:var(--border2);}
 .tipo-btn.selected{border-color:var(--accent);background:var(--accent-bg);}
-.tipo-btn-icon{font-size:24px;margin-bottom:4px;}
-.tipo-btn-label{font-size:12px;color:var(--txt2);font-family:var(--mono);}
+.tipo-btn-icon{font-size:26px;margin-bottom:5px;}
+.tipo-btn-label{font-size:13px;color:var(--txt2);font-family:var(--mono);}
 .tipo-btn.selected .tipo-btn-label{color:var(--accent);}
-.fields-block{border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:14px;background:var(--bg3);}
-.fields-block-title{font-size:11px;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono);margin-bottom:12px;}
-.rep-row{display:grid;grid-template-columns:1fr 110px 80px 70px 80px 30px;gap:6px;align-items:center;margin-bottom:6px;}
-.rep-row-hdr{font-size:11px;color:var(--txt3);font-family:var(--mono);margin-bottom:6px;display:grid;grid-template-columns:1fr 110px 80px 70px 80px 30px;gap:6px;}
-.rep-row input{padding:6px 10px;font-size:13px;}
-.btn-rep-rm{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:4px;}
+.rep-row{display:grid;grid-template-columns:1fr 110px 80px 70px 85px 30px;gap:7px;align-items:center;margin-bottom:7px;}
+.rep-row-hdr{font-size:12px;color:var(--txt3);font-family:var(--mono);margin-bottom:7px;display:grid;grid-template-columns:1fr 110px 80px 70px 85px 30px;gap:7px;}
+.rep-row input{padding:7px 10px;font-size:14px;}
+.btn-rep-rm{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:15px;padding:4px;}
 .btn-rep-rm:hover{color:var(--red);}
-.sep{height:1px;background:var(--border);margin:16px 0;}
-.veh-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:all .15s;}
+.sep{height:1px;background:var(--border);margin:18px 0;}
+.veh-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;transition:all .15s;}
 .veh-card:hover{border-color:var(--border2);transform:translateY(-1px);}
 .veh-card.selected{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);}
-.veh-photo{width:100%;height:140px;object-fit:cover;border-radius:var(--radius);margin-bottom:14px;}
-.veh-photo-ph{width:100%;height:140px;border-radius:var(--radius);margin-bottom:14px;background:var(--bg3);display:flex;align-items:center;justify-content:center;color:var(--txt3);font-size:32px;}
-.veh-make{font-size:12px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px;}
-.veh-name{font-family:var(--serif);font-size:17px;font-weight:500;margin:2px 0 6px;}
-.veh-km{font-family:var(--mono);font-size:20px;font-weight:500;color:var(--accent);margin:8px 0 2px;}
-.veh-km-lbl{font-size:11px;color:var(--txt3);font-family:var(--mono);}
-.ag-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.veh-photo{width:100%;height:150px;object-fit:cover;border-radius:var(--radius);margin-bottom:16px;}
+.veh-photo-ph{width:100%;height:150px;border-radius:var(--radius);margin-bottom:16px;background:var(--bg3);display:flex;align-items:center;justify-content:center;color:var(--txt3);font-size:36px;}
+.veh-make{font-size:13px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px;}
+.veh-name{font-family:var(--serif);font-size:19px;font-weight:500;margin:3px 0 8px;}
+.veh-km{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--accent);margin:10px 0 3px;}
+.veh-km-lbl{font-size:12px;color:var(--txt3);font-family:var(--mono);}
+.ag-item{display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid var(--border);}
 .ag-item:last-child{border-bottom:none;}
-.ag-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
-.fchip{padding:5px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;color:var(--txt2);transition:all .12s;white-space:nowrap;}
+.filter-bar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;}
+.fchip{padding:6px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer;color:var(--txt2);transition:all .12s;white-space:nowrap;}
 .fchip:hover,.fchip.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent);}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
-.section-title{font-family:var(--serif);font-size:22px;font-weight:500;}
-.section-sub{font-size:13px;color:var(--txt2);margin-top:2px;}
-.empty{text-align:center;padding:60px 20px;color:var(--txt3);}
-.empty-icon{font-size:40px;margin-bottom:12px;opacity:.4;}
-.empty-title{font-family:var(--serif);font-size:16px;color:var(--txt2);margin-bottom:4px;}
-.empty-sub{font-size:13px;}
-.km-upd{display:flex;gap:8px;align-items:center;}
-.km-upd input{width:130px;}
-.flex{display:flex;}.gap-8{gap:8px;}.gap-12{gap:12px;}.items-center{align-items:center;}.justify-between{justify-content:space-between;}.flex-wrap{flex-wrap:wrap;}.mt-4{margin-top:4px;}.mt-8{margin-top:8px;}.mt-12{margin-top:12px;}.mt-16{margin-top:16px;}.mb-12{margin-bottom:12px;}.text-sm{font-size:13px;}.text-xs{font-size:11px;}.text-muted{color:var(--txt2);}.text-mono{font-family:var(--mono);}.hidden{display:none!important;}
-@media(max-width:768px){#sidebar{display:none;}#content{padding:16px;}.form-row,.form-row-3{grid-template-columns:1fr;}.tipo-grid{grid-template-columns:repeat(3,1fr);}.rep-row,.rep-row-hdr{grid-template-columns:1fr 70px 60px 30px;}}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+.section-title{font-family:var(--serif);font-size:24px;font-weight:500;}
+.section-sub{font-size:14px;color:var(--txt2);margin-top:3px;}
+.empty{text-align:center;padding:70px 20px;color:var(--txt3);}
+.empty-icon{font-size:44px;margin-bottom:14px;opacity:.4;}
+.empty-title{font-family:var(--serif);font-size:17px;color:var(--txt2);margin-bottom:5px;}
+.empty-sub{font-size:14px;}
+.km-upd{display:flex;gap:9px;align-items:center;}
+.km-upd input{width:136px;}
+/* foto upload */
+.foto-area{width:100%;height:160px;border:2px dashed var(--border2);border-radius:var(--radius-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s;position:relative;overflow:hidden;background:var(--bg3);}
+.foto-area:hover{border-color:var(--accent);}
+.foto-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.foto-area-label{font-size:14px;color:var(--txt2);margin-top:8px;text-align:center;line-height:1.4;}
+.foto-area-icon{font-size:28px;opacity:.5;}
+.foto-btns{display:flex;gap:8px;margin-top:10px;}
+/* info box */
+.info-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;font-size:14px;color:var(--txt2);line-height:1.6;}
+.info-box strong{color:var(--txt);}
+/* quick actions */
+.quick-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;}
+.qa-btn{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);cursor:pointer;transition:all .15s;font-size:14px;color:var(--txt2);font-family:var(--sans);}
+.qa-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg);}
+.qa-btn-icon{font-size:20px;}
+.flex{display:flex;}.gap-8{gap:8px;}.gap-10{gap:10px;}.gap-12{gap:12px;}.items-center{align-items:center;}.justify-between{justify-content:space-between;}.flex-wrap{flex-wrap:wrap;}.mt-4{margin-top:4px;}.mt-8{margin-top:8px;}.mt-10{margin-top:10px;}.mt-12{margin-top:12px;}.mt-16{margin-top:16px;}.mb-10{margin-bottom:10px;}.mb-14{margin-bottom:14px;}.text-sm{font-size:14px;}.text-xs{font-size:12px;}.text-muted{color:var(--txt2);}.text-mono{font-family:var(--mono);}.hidden{display:none!important;}
+@media(max-width:768px){#sidebar{display:none;}#content{padding:18px;}.form-row,.form-row-3{grid-template-columns:1fr;}.tipo-grid{grid-template-columns:repeat(3,1fr);}.rep-row,.rep-row-hdr{grid-template-columns:1fr 75px 65px 30px;}}
 ::-webkit-scrollbar{width:6px;height:6px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
 </style>
 </head>
@@ -144,7 +159,7 @@ select option{background:var(--bg3);}
 <aside id="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">Mi<span>Garage</span></div>
-    <div class="sidebar-sub">v2.0 · eventos</div>
+    <div class="sidebar-sub">v3.0 · eventos</div>
   </div>
   <div class="vehicle-picker">
     <select id="veh-selector" onchange="selectVehicle(this.value)">
@@ -180,6 +195,19 @@ select option{background:var(--bg3);}
       <span class="modal-title" id="mveh-title">Nuevo vehículo</span>
       <button class="modal-close" onclick="closeModal('modal-veh')">&#x2715;</button>
     </div>
+    <!-- foto -->
+    <div class="form-group">
+      <label>Foto del vehículo</label>
+      <div class="foto-area" id="foto-area" onclick="document.getElementById('foto-file').click()">
+        <div class="foto-area-icon">📷</div>
+        <div class="foto-area-label">Tocá para tomar foto o elegir de la galería</div>
+      </div>
+      <input type="file" id="foto-file" accept="image/*" capture="environment" class="hidden" onchange="handleFoto(event)">
+      <div class="foto-btns">
+        <button class="btn btn-sm" onclick="document.getElementById('foto-file').click()">📷 Cámara / Galería</button>
+        <button class="btn btn-sm" id="btn-quitar-foto" onclick="quitarFoto()" style="display:none">✕ Quitar foto</button>
+      </div>
+    </div>
     <div class="form-row">
       <div class="form-group"><label>Marca</label><input id="vf-marca" placeholder="Toyota, Honda, Yamaha…"></div>
       <div class="form-group"><label>Modelo</label><input id="vf-modelo" placeholder="Corolla, Civic, MT-07…"></div>
@@ -213,7 +241,6 @@ select option{background:var(--bg3);}
         <option value="auto">Automóvil</option><option value="moto">Moto</option><option value="camioneta">Camioneta / SUV</option><option value="utilitario">Utilitario</option>
       </select>
     </div>
-    <div class="form-group"><label>URL de foto principal (opcional)</label><input id="vf-foto" placeholder="https://…/foto.jpg"></div>
     <div class="form-group"><label>Notas</label><textarea id="vf-notas"></textarea></div>
     <div class="modal-footer">
       <button class="btn" onclick="closeModal('modal-veh')">Cancelar</button>
@@ -229,52 +256,42 @@ select option{background:var(--bg3);}
       <span class="modal-title" id="mev-title">Nuevo evento</span>
       <button class="modal-close" onclick="closeModal('modal-ev')">&#x2715;</button>
     </div>
-
-    <!-- paso 1: tipo -->
     <div id="ev-p1">
-      <div style="font-size:12px;color:var(--txt2);font-family:var(--mono);margin-bottom:12px;">Tipo de evento</div>
+      <div style="font-size:13px;color:var(--txt2);font-family:var(--mono);margin-bottom:14px;">Tipo de evento</div>
       <div class="tipo-grid" id="tipo-grid"></div>
     </div>
-
-    <!-- paso 2: campos -->
     <div id="ev-p2" class="hidden">
-      <div class="flex items-center gap-8 mb-12" style="cursor:pointer;" onclick="volverTipo()">
-        <span style="color:var(--txt3);font-size:13px;">&#8592; cambiar tipo</span>
+      <div class="flex items-center gap-8 mb-14" style="cursor:pointer;" onclick="volverTipo()">
+        <span style="color:var(--txt3);font-size:14px;">&#8592; cambiar tipo</span>
         <span id="ev-tipo-badge" class="badge badge-blue"></span>
       </div>
-
       <div class="form-row">
         <div class="form-group"><label>Fecha</label><input id="ef-fecha" type="date"></div>
         <div class="form-group"><label>Kilometraje</label><input id="ef-km" type="number" placeholder="0"></div>
       </div>
-
       <div class="form-group hidden" id="ef-subtipo-wrap">
         <label id="ef-subtipo-label">Trabajo realizado</label>
         <select id="ef-subtipo"></select>
       </div>
-
       <div id="ef-blq-taller" class="hidden">
         <div class="form-row">
           <div class="form-group"><label>Taller / Mecánico</label><input id="ef-taller" placeholder="Taller Pérez…"></div>
           <div class="form-group"><label>Ciudad</label><input id="ef-ciudad" placeholder="Buenos Aires…"></div>
         </div>
       </div>
-
       <div class="form-group">
         <label>Descripción / notas</label>
-        <textarea id="ef-desc" style="min-height:60px;"></textarea>
+        <textarea id="ef-desc" style="min-height:65px;"></textarea>
       </div>
-
       <div id="ef-blq-rep" class="hidden">
         <div class="sep"></div>
-        <div class="flex items-center justify-between mb-12">
+        <div class="flex items-center justify-between mb-14">
           <strong class="text-sm">Repuestos utilizados</strong>
           <button class="btn btn-sm" onclick="addRepRow()">+ Agregar repuesto</button>
         </div>
         <div class="rep-row-hdr"><span>Nombre</span><span>Marca</span><span>Código</span><span>Cant.</span><span>P. unit.</span><span></span></div>
         <div id="rep-list"></div>
       </div>
-
       <div id="ef-blq-comb" class="hidden">
         <div class="form-row">
           <div class="form-group"><label>Litros cargados</label><input id="ef-litros" type="number" placeholder="40" oninput="calcComb()"></div>
@@ -282,22 +299,19 @@ select option{background:var(--bg3);}
         </div>
         <div class="form-group"><label>Estación / Empresa</label><input id="ef-estacion" placeholder="YPF, Shell, Axion…"></div>
       </div>
-
       <div id="ef-blq-sini" class="hidden">
         <div class="form-row">
           <div class="form-group"><label>N° de siniestro</label><input id="ef-nro-sini" placeholder="SIN-2024-001"></div>
           <div class="form-group"><label>Aseguradora</label><input id="ef-aseg" placeholder="Mapfre, San Cristóbal…"></div>
         </div>
-        <div class="form-group"><label>Descripción del siniestro</label><textarea id="ef-desc-sini" style="min-height:56px;"></textarea></div>
+        <div class="form-group"><label>Descripción del siniestro</label><textarea id="ef-desc-sini" style="min-height:60px;"></textarea></div>
       </div>
-
       <div class="sep"></div>
       <div class="form-row-3">
         <div class="form-group"><label id="ef-lbl-mdo">Mano de obra</label><input id="ef-mdo" type="number" placeholder="0" oninput="calcTotal()"></div>
         <div class="form-group" id="ef-rep-total-wrap"><label>Repuestos (total)</label><input id="ef-rep-total" type="number" readonly></div>
         <div class="form-group"><label>Costo total</label><input id="ef-total" type="number" placeholder="0"></div>
       </div>
-
       <div id="ef-blq-prox" class="hidden">
         <div class="form-row">
           <div class="form-group"><label>Próximo servicio (km)</label><input id="ef-prox-km" type="number" placeholder="ej. 88000"></div>
@@ -305,7 +319,6 @@ select option{background:var(--bg3);}
         </div>
       </div>
     </div>
-
     <div class="modal-footer">
       <button class="btn" onclick="closeModal('modal-ev')">Cancelar</button>
       <button class="btn btn-primary hidden" id="btn-guardar-ev" onclick="saveEvento()">Guardar evento</button>
@@ -338,7 +351,7 @@ select option{background:var(--bg3);}
       <div class="form-group"><label>Fecha último realizado</label><input id="af-fecha-last" type="date"></div>
       <div class="form-group"><label>Próximo en (días)</label><input id="af-int-dias" type="number" placeholder="365"></div>
     </div>
-    <div class="form-group"><label>Notas</label><textarea id="af-notas" style="min-height:56px;"></textarea></div>
+    <div class="form-group"><label>Notas</label><textarea id="af-notas" style="min-height:60px;"></textarea></div>
     <div class="modal-footer">
       <button class="btn" onclick="closeModal('modal-agenda')">Cancelar</button>
       <button class="btn btn-primary" onclick="saveAgenda()">Guardar alerta</button>
@@ -348,7 +361,7 @@ select option{background:var(--bg3);}
 
 <!-- MODAL: Confirmar -->
 <div class="modal-overlay hidden" id="modal-confirm">
-  <div class="modal" style="max-width:400px;">
+  <div class="modal" style="max-width:420px;">
     <div class="modal-header">
       <span class="modal-title">Confirmar eliminación</span>
       <button class="modal-close" onclick="closeModal('modal-confirm')">&#x2715;</button>
@@ -377,12 +390,12 @@ const TIPOS=[
   {id:'vtv',label:'VTV',icon:'📄',color:'badge-teal',
    subtipo:null,opciones:[],taller:true,repuestos:false,proximo:true},
   {id:'modificacion',label:'Modificación',icon:'⚙️',color:'badge-purple',
-   subtipo:'Tipo de modificación',opciones:['Motor','Escape','Suspensión','Frenos','Exterior / Carrocería','Interior','Audio / Multimedia','Electrónico','Ruedas / Llantas','Otro'],
+   subtipo:'Tipo',opciones:['Motor','Escape','Suspensión','Frenos','Exterior / Carrocería','Interior','Audio / Multimedia','Electrónico','Ruedas / Llantas','Otro'],
    taller:true,repuestos:true,proximo:false},
   {id:'combustible',label:'Combustible',icon:'⛽',color:'badge-green',
    subtipo:null,opciones:[],taller:false,repuestos:false,proximo:false,combustible:true},
   {id:'lavado',label:'Lavado',icon:'🚿',color:'badge-gray',
-   subtipo:'Tipo de lavado',opciones:['Lavado básico','Lavado completo','Lavado interior','Encerado / Pulido','Detailing','Otro'],
+   subtipo:'Tipo',opciones:['Lavado básico','Lavado completo','Lavado interior','Encerado / Pulido','Detailing','Otro'],
    taller:false,repuestos:false,proximo:false},
   {id:'otro',label:'Otro',icon:'📝',color:'badge-gray',
    subtipo:'Categoría',opciones:['Peaje / Infraestructura','Seguro','Patente / Impuesto','Estacionamiento','Otro'],
@@ -398,6 +411,7 @@ const DB={
 };
 
 let state={vehiculos:[],eventos:[],agenda:[],currentVeh:null,currentPage:'dashboard',editId:null,filterTipo:null};
+let fotoDataUrl=null;
 
 function load(){
   state.vehiculos=DB.load('vehiculos');
@@ -429,8 +443,8 @@ const evForVeh=id=>state.eventos.filter(e=>e.vehId===id).sort((a,b)=>b.km-a.km||
 const agForVeh=id=>state.agenda.filter(a=>a.vehId===id);
 const vehIcon=t=>({auto:'🚗',moto:'🏍',camioneta:'🚙',utilitario:'🚐'}[t]||'🚗');
 const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
-const show=id=>document.getElementById(id).classList.remove('hidden');
-const hide=id=>document.getElementById(id).classList.add('hidden');
+const show=id=>document.getElementById(id)?.classList.remove('hidden');
+const hide=id=>document.getElementById(id)?.classList.add('hidden');
 
 function goTo(page){
   state.currentPage=page;
@@ -451,24 +465,55 @@ function confirm(msg,cb){
   openModal('modal-confirm');
 }
 
+/* FOTO */
+function handleFoto(ev){
+  const file=ev.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const canvas=document.createElement('canvas');
+      const MAX=800;
+      let w=img.width,h=img.height;
+      if(w>h){if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}}
+      else{if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}}
+      canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      fotoDataUrl=canvas.toDataURL('image/jpeg',0.82);
+      updateFotoPreview(fotoDataUrl);
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+function updateFotoPreview(src){
+  const area=document.getElementById('foto-area');
+  area.innerHTML=src?`<img src="${src}">`:`<div class="foto-area-icon">📷</div><div class="foto-area-label">Tocá para tomar foto o elegir de la galería</div>`;
+  const btn=document.getElementById('btn-quitar-foto');
+  if(btn)btn.style.display=src?'':'none';
+}
+function quitarFoto(){fotoDataUrl=null;updateFotoPreview(null);}
+
 /* VEHÍCULO */
 function openNewVeh(){
-  state.editId=null;
+  state.editId=null;fotoDataUrl=null;
   document.getElementById('mveh-title').textContent='Nuevo vehículo';
-  ['marca','modelo','version','anio','patente','vin','motor','notas','foto'].forEach(f=>document.getElementById('vf-'+f).value='');
+  ['marca','modelo','version','anio','patente','vin','motor','notas'].forEach(f=>document.getElementById('vf-'+f).value='');
   document.getElementById('vf-combustible').value='Nafta';
   document.getElementById('vf-estado').value='activo';
   document.getElementById('vf-tipo').value='auto';
   document.getElementById('vf-km-compra').value='0';
   document.getElementById('vf-km-actual').value='0';
   document.getElementById('vf-fecha-compra').value=today();
+  updateFotoPreview(null);
   openModal('modal-veh');
 }
 function openEditVeh(id){
   const v=getVeh(id);if(!v)return;
   state.editId=id;
+  fotoDataUrl=v.foto||null;
   document.getElementById('mveh-title').textContent='Editar vehículo';
-  ['marca','modelo','version','patente','vin','motor','notas','foto'].forEach(f=>document.getElementById('vf-'+f).value=v[f]||'');
+  ['marca','modelo','version','patente','vin','motor','notas'].forEach(f=>document.getElementById('vf-'+f).value=v[f]||'');
   document.getElementById('vf-anio').value=v.anio||'';
   document.getElementById('vf-combustible').value=v.combustible||'Nafta';
   document.getElementById('vf-fecha-compra').value=v.fechaCompra||'';
@@ -476,6 +521,7 @@ function openEditVeh(id){
   document.getElementById('vf-km-actual').value=v.kmActual||0;
   document.getElementById('vf-estado').value=v.estado||'activo';
   document.getElementById('vf-tipo').value=v.tipo||'auto';
+  updateFotoPreview(fotoDataUrl);
   openModal('modal-veh');
 }
 function saveVehiculo(){
@@ -493,7 +539,7 @@ function saveVehiculo(){
     kmActual:Number(document.getElementById('vf-km-actual').value)||0,
     estado:document.getElementById('vf-estado').value,
     tipo:document.getElementById('vf-tipo').value,
-    foto:document.getElementById('vf-foto').value.trim(),
+    foto:fotoDataUrl||null,
     notas:document.getElementById('vf-notas').value.trim()
   };
   if(!v.marca||!v.modelo){alert('Marca y modelo son obligatorios.');return;}
@@ -521,13 +567,14 @@ function updateKm(id){
 let repRows=[];
 let curTipo=null;
 
-function openNewEvento(){
+function openNewEvento(tipoPresel){
   if(!state.currentVeh){alert('Seleccioná un vehículo primero.');return;}
   state.editId=null;curTipo=null;
   document.getElementById('mev-title').textContent='Nuevo evento';
   show('ev-p1');hide('ev-p2');hide('btn-guardar-ev');
   buildTipoGrid();clearEvFields();
   openModal('modal-ev');
+  if(tipoPresel){selectTipo(tipoPresel);}
 }
 function openEditEvento(id){
   const ev=state.eventos.find(e=>e.id===id);if(!ev)return;
@@ -570,9 +617,7 @@ function selectTipo(id){
   document.getElementById('ef-fecha').value=today();
   document.getElementById('ef-km').value=v?v.kmActual:'';
 }
-function volverTipo(){
-  show('ev-p1');hide('ev-p2');hide('btn-guardar-ev');buildTipoGrid();
-}
+function volverTipo(){show('ev-p1');hide('ev-p2');hide('btn-guardar-ev');buildTipoGrid();}
 function clearEvFields(){
   ['ef-fecha','ef-km','ef-desc','ef-subtipo','ef-taller','ef-ciudad','ef-mdo','ef-rep-total',
    'ef-total','ef-prox-km','ef-prox-fecha','ef-litros','ef-pxl','ef-estacion',
@@ -592,16 +637,9 @@ function setupCampos(t){
   t.proximo?show('ef-blq-prox'):hide('ef-blq-prox');
   t.combustible?show('ef-blq-comb'):hide('ef-blq-comb');
   t.siniestro?show('ef-blq-sini'):hide('ef-blq-sini');
-  if(t.id==='combustible'){
-    document.getElementById('ef-lbl-mdo').textContent='Total cargado';
-    hide('ef-rep-total-wrap');
-  } else if(t.id==='lavado'){
-    document.getElementById('ef-lbl-mdo').textContent='Costo';
-    hide('ef-rep-total-wrap');
-  } else {
-    document.getElementById('ef-lbl-mdo').textContent='Mano de obra';
-    t.repuestos?show('ef-rep-total-wrap'):hide('ef-rep-total-wrap');
-  }
+  if(t.id==='combustible'){document.getElementById('ef-lbl-mdo').textContent='Total cargado';hide('ef-rep-total-wrap');}
+  else if(t.id==='lavado'){document.getElementById('ef-lbl-mdo').textContent='Costo';hide('ef-rep-total-wrap');}
+  else{document.getElementById('ef-lbl-mdo').textContent='Mano de obra';t.repuestos?show('ef-rep-total-wrap'):hide('ef-rep-total-wrap');}
 }
 function calcComb(){
   const l=Number(document.getElementById('ef-litros').value)||0;
@@ -610,8 +648,7 @@ function calcComb(){
 }
 function calcRepTotal(){
   const t=repRows.reduce((s,r)=>s+(r.precio*r.cant),0);
-  const el=document.getElementById('ef-rep-total');if(el)el.value=t||'';
-  calcTotal();
+  const el=document.getElementById('ef-rep-total');if(el)el.value=t||'';calcTotal();
 }
 function calcTotal(){
   if(!curTipo||curTipo.id==='combustible')return;
@@ -638,8 +675,8 @@ function saveEvento(){
   const fecha=document.getElementById('ef-fecha').value;
   if(!fecha){alert('La fecha es obligatoria.');return;}
   const ev={
-    id:state.editId||uid(),vehId:state.currentVeh,categoria:curTipo.id,
-    fecha,km:Number(document.getElementById('ef-km').value)||0,
+    id:state.editId||uid(),vehId:state.currentVeh,categoria:curTipo.id,fecha,
+    km:Number(document.getElementById('ef-km').value)||0,
     subtipo:document.getElementById('ef-subtipo')?.value||'',
     descripcion:document.getElementById('ef-desc').value.trim(),
     taller:document.getElementById('ef-taller').value.trim(),
@@ -705,6 +742,45 @@ function agendaStatus(a,veh){
   return{proxKm,proxFecha,kmR,dR,level};
 }
 
+/* EXCEL EXPORT */
+function exportExcel(){
+  const veh=state.vehiculos;
+  const evs=state.eventos;
+  // build CSV-like with tab separator for easy Excel paste, or use data URI trick
+  let rows=[['Fecha','Vehículo','Categoría','Subtipo/Detalle','Taller','Ciudad','Mano de obra','Repuestos','Total','Km','Descripción']];
+  evs.forEach(e=>{
+    const v=getVeh(e.vehId);
+    const vNombre=v?v.marca+' '+v.modelo+' ('+v.patente+')':'';
+    const t=tipoById(e.categoria);
+    rows.push([
+      e.fecha,vNombre,t.label,e.subtipo||'',e.taller||'',e.ciudad||'',
+      e.mdo||0,(e.repuestos||[]).reduce((s,r)=>s+r.precio*r.cant,0),e.total||0,e.km||0,e.descripcion||''
+    ]);
+  });
+  const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const bom='\uFEFF';
+  const blob=new Blob([bom+csv],{type:'text/csv;charset=utf-8;'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='migarage-eventos.csv';
+  a.click();
+}
+
+/* BACKUP POR EMAIL */
+function enviarBackupEmail(){
+  const email=DB.cfg('backup-email','');
+  if(!email){alert('Configurá un correo de backup en la sección de Datos.');return;}
+  const d=JSON.stringify({vehiculos:state.vehiculos,eventos:state.eventos,agenda:state.agenda,exportedAt:new Date().toISOString()},null,2);
+  const blob=new Blob([d],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  // Open mailto with instructions — file attachment via mailto not supported in browsers
+  // So we download + open mail client with instructions
+  const a=document.createElement('a');a.href=url;a.download='migarage-backup.json';a.click();
+  setTimeout(()=>{
+    window.location.href=`mailto:${email}?subject=MiGarage%20Backup%20${new Date().toLocaleDateString('es-AR')}&body=Adjuntá%20el%20archivo%20migarage-backup.json%20que%20se%20acaba%20de%20descargar.`;
+  },800);
+}
+
 /* RENDER */
 function renderSidebar(){
   const sel=document.getElementById('veh-selector');
@@ -726,7 +802,7 @@ function render(){
 /* DASHBOARD */
 function renderDashboard(){
   const veh=getVeh(state.currentVeh);
-  if(!state.vehiculos.length)return`<div class="empty"><div class="empty-icon">🏁</div><div class="empty-title">Bienvenido a MiGarage</div><div class="empty-sub">Comenzá agregando tu primer vehículo</div><button class="btn btn-primary" style="margin-top:16px" onclick="goTo('vehiculos');openNewVeh()">+ Agregar vehículo</button></div>`;
+  if(!state.vehiculos.length)return`<div class="empty"><div class="empty-icon">🏁</div><div class="empty-title">Bienvenido a MiGarage</div><div class="empty-sub">Comenzá agregando tu primer vehículo</div><button class="btn btn-primary" style="margin-top:18px" onclick="goTo('vehiculos');openNewVeh()">+ Agregar vehículo</button></div>`;
   if(!veh)return`<div class="empty"><div class="empty-icon">👆</div><div class="empty-title">Seleccioná un vehículo en el panel izquierdo</div></div>`;
   const evs=evForVeh(veh.id);
   const totalMant=evs.filter(e=>e.categoria!=='combustible').reduce((s,e)=>s+e.total,0);
@@ -737,57 +813,67 @@ function renderDashboard(){
   const cpk=kmRec>0?(totalMant+totalComb)/kmRec:0;
   const alerts=agForVeh(veh.id).map(a=>({a,s:agendaStatus(a,veh)})).filter(x=>x.s.level!=='ok');
   return`
-  <div class="card" style="margin-bottom:20px;">
+  <div class="card" style="margin-bottom:22px;">
     <div class="flex items-center gap-12">
-      ${veh.foto?`<img src="${esc(veh.foto)}" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0;">`:`<div style="width:80px;height:60px;background:var(--bg3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;">${vehIcon(veh.tipo)}</div>`}
+      ${veh.foto?`<img src="${veh.foto}" style="width:88px;height:66px;object-fit:cover;border-radius:10px;flex-shrink:0;">`:`<div style="width:88px;height:66px;background:var(--bg3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;">${vehIcon(veh.tipo)}</div>`}
       <div style="flex:1">
-        <div style="font-size:11px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;">${esc(veh.marca)}</div>
-        <div style="font-family:var(--serif);font-size:20px;font-weight:500;">${esc(veh.modelo)} ${esc(veh.version)}</div>
-        <div class="flex gap-8 mt-4 flex-wrap">
+        <div style="font-size:12px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;">${esc(veh.marca)}</div>
+        <div style="font-family:var(--serif);font-size:21px;font-weight:500;">${esc(veh.modelo)} ${esc(veh.version)}</div>
+        <div class="flex gap-8 mt-8 flex-wrap">
           ${veh.patente?`<span class="badge badge-blue">${esc(veh.patente)}</span>`:''}
           ${veh.anio?`<span class="badge badge-gray">${esc(veh.anio)}</span>`:''}
           <span class="badge ${veh.estado==='activo'?'badge-green':'badge-gray'}">${veh.estado}</span>
         </div>
       </div>
       <div style="text-align:right;">
-        <div style="font-family:var(--mono);font-size:26px;font-weight:500;color:var(--accent);">${fmtKm(veh.kmActual)}</div>
+        <div style="font-family:var(--mono);font-size:28px;font-weight:600;color:var(--accent);">${fmtKm(veh.kmActual)}</div>
         <div class="text-xs text-muted">km actuales</div>
-        <div class="flex gap-8 mt-8 items-center km-upd">
-          <input id="km-input-${veh.id}" type="number" value="${veh.kmActual}" style="width:120px;padding:5px 8px;font-size:13px;">
+        <div class="flex gap-8 mt-10 items-center km-upd">
+          <input id="km-input-${veh.id}" type="number" value="${veh.kmActual}" style="width:128px;padding:6px 10px;font-size:14px;">
           <button class="btn btn-sm" onclick="updateKm('${veh.id}')">Actualizar</button>
         </div>
       </div>
     </div>
   </div>
-  <div class="grid-4" style="margin-bottom:20px;">
-    <div class="stat"><div class="stat-label">Gasto ${anio}</div><div class="stat-value" style="font-size:18px;">${fmt(gastoAnio)}</div></div>
-    <div class="stat"><div class="stat-label">Mantenimiento total</div><div class="stat-value" style="font-size:18px;">${fmt(totalMant)}</div></div>
-    <div class="stat"><div class="stat-label">Combustible total</div><div class="stat-value" style="font-size:18px;">${fmt(totalComb)}</div></div>
-    <div class="stat"><div class="stat-label">Costo / km</div><div class="stat-value" style="font-size:18px;">${cpk>0?fmt(Math.round(cpk)):'—'}</div><div class="stat-sub">${evs.length} eventos</div></div>
+
+  <!-- Acceso rápido a nuevo evento -->
+  <div style="margin-bottom:22px;">
+    <div style="font-size:12px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">Registrar nuevo evento</div>
+    <div class="quick-actions">
+      ${TIPOS.map(t=>`<button class="qa-btn" onclick="openNewEvento('${t.id}')"><span class="qa-btn-icon">${t.icon}</span>${t.label}</button>`).join('')}
+    </div>
   </div>
+
+  <div class="grid-4" style="margin-bottom:22px;">
+    <div class="stat"><div class="stat-label">Gasto ${anio}</div><div class="stat-value">${fmt(gastoAnio)}</div></div>
+    <div class="stat"><div class="stat-label">Mantenimiento total</div><div class="stat-value">${fmt(totalMant)}</div></div>
+    <div class="stat"><div class="stat-label">Combustible total</div><div class="stat-value">${fmt(totalComb)}</div></div>
+    <div class="stat"><div class="stat-label">Costo / km</div><div class="stat-value">${cpk>0?fmt(Math.round(cpk)):'—'}</div><div class="stat-sub">${evs.length} eventos</div></div>
+  </div>
+
   <div class="grid-2">
     <div class="card">
       <div class="card-header"><span class="card-title">Alertas activas</span><button class="btn btn-sm" onclick="goTo('agenda')">Ver todas</button></div>
       ${alerts.length?alerts.slice(0,5).map(({a,s})=>`
         <div class="ag-item">
-          <div class="ag-dot ${s.level==='due'?'agenda-due':'agenda-warn'}" style="${s.level==='due'?'background:var(--red)':'background:var(--orange)'}"></div>
+          <div style="width:11px;height:11px;border-radius:50%;flex-shrink:0;background:${s.level==='due'?'var(--red)':'var(--orange)'}"></div>
           <div style="flex:1">
-            <div style="font-size:13.5px;font-weight:500;">${esc(a.tipo)}</div>
-            <div style="font-size:12px;color:var(--txt2);font-family:var(--mono);">${a.intervaloKm?'Próx. '+fmtKm(s.proxKm):''}${a.intervaloDias&&s.proxFecha?' · '+fmtDate(s.proxFecha):''}</div>
+            <div style="font-size:15px;font-weight:500;">${esc(a.tipo)}</div>
+            <div style="font-size:13px;color:var(--txt2);font-family:var(--mono);">${a.intervaloKm?'Próx. '+fmtKm(s.proxKm):''}${a.intervaloDias&&s.proxFecha?' · '+fmtDate(s.proxFecha):''}</div>
           </div>
-          <span style="font-size:12px;font-family:var(--mono);color:${s.level==='due'?'var(--red)':'var(--orange)'}">${s.level==='due'?'Vencido':s.kmR!==null?'En '+fmtKm(s.kmR):s.dR+'d'}</span>
+          <span style="font-size:13px;font-family:var(--mono);color:${s.level==='due'?'var(--red)':'var(--orange)'}">${s.level==='due'?'Vencido':s.kmR!==null?'En '+fmtKm(s.kmR):s.dR+'d'}</span>
         </div>`).join(''):`<div class="text-sm text-muted">Sin alertas pendientes 🎉</div>`}
     </div>
     <div class="card">
       <div class="card-header"><span class="card-title">Últimos eventos</span><button class="btn btn-sm" onclick="goTo('eventos')">Ver todos</button></div>
       ${evs.slice(0,6).map(ev=>{const t=tipoById(ev.categoria);return`
         <div class="ag-item">
-          <span style="font-size:18px;">${t.icon}</span>
+          <span style="font-size:20px;">${t.icon}</span>
           <div style="flex:1">
-            <div style="font-size:13.5px;font-weight:500;">${t.label}${ev.subtipo?' · '+esc(ev.subtipo):''}</div>
-            <div style="font-size:12px;color:var(--txt2);font-family:var(--mono);">${fmtDate(ev.fecha)} · ${fmtKm(ev.km)}</div>
+            <div style="font-size:15px;font-weight:500;">${t.label}${ev.subtipo?' · '+esc(ev.subtipo):''}</div>
+            <div style="font-size:13px;color:var(--txt2);font-family:var(--mono);">${fmtDate(ev.fecha)} · ${fmtKm(ev.km)}</div>
           </div>
-          ${ev.total?`<div class="text-sm text-mono" style="color:var(--accent)">${fmt(ev.total)}</div>`:''}
+          ${ev.total?`<div style="font-size:14px;font-family:var(--mono);color:var(--accent)">${fmt(ev.total)}</div>`:''}
         </div>`;}).join('')||'<div class="text-sm text-muted">Sin eventos registrados.</div>'}
     </div>
   </div>`;
@@ -795,11 +881,11 @@ function renderDashboard(){
 
 /* VEHICULOS */
 function renderVehiculos(){
-  if(!state.vehiculos.length)return`<div class="empty"><div class="empty-icon">🏎</div><div class="empty-title">Sin vehículos registrados</div><button class="btn btn-primary" style="margin-top:16px" onclick="openNewVeh()">+ Nuevo vehículo</button></div>`;
+  if(!state.vehiculos.length)return`<div class="empty"><div class="empty-icon">🏎</div><div class="empty-title">Sin vehículos registrados</div><button class="btn btn-primary" style="margin-top:18px" onclick="openNewVeh()">+ Nuevo vehículo</button></div>`;
   return`<div class="grid-3">${state.vehiculos.map(v=>{
     const evs=evForVeh(v.id);const total=evs.reduce((s,e)=>s+e.total,0);
     return`<div class="veh-card ${v.id===state.currentVeh?'selected':''}">
-      ${v.foto?`<img class="veh-photo" src="${esc(v.foto)}">`:`<div class="veh-photo-ph">${vehIcon(v.tipo)}</div>`}
+      ${v.foto?`<img class="veh-photo" src="${v.foto}">`:`<div class="veh-photo-ph">${vehIcon(v.tipo)}</div>`}
       <div class="veh-make">${esc(v.marca)} · ${esc(v.anio)}</div>
       <div class="veh-name">${esc(v.modelo)} ${esc(v.version)}</div>
       <div class="flex flex-wrap gap-8 mt-8">
@@ -809,14 +895,14 @@ function renderVehiculos(){
       </div>
       <div class="veh-km">${fmtKm(v.kmActual)}</div>
       <div class="veh-km-lbl">km actuales</div>
-      <div class="sep" style="margin:12px 0;"></div>
+      <div class="sep" style="margin:14px 0;"></div>
       <div class="flex items-center justify-between text-xs text-muted">
         <span>${evs.length} evento${evs.length!==1?'s':''}</span>
         <span>${fmt(total)} total</span>
       </div>
       <div class="flex gap-8 mt-12">
         <button class="btn btn-sm" style="flex:1" onclick="selectVehicle('${v.id}');goTo('dashboard')">Dashboard</button>
-        <button class="btn btn-sm" onclick="openEditVeh('${v.id}')">&#x270E;</button>
+        <button class="btn btn-sm" onclick="openEditVeh('${v.id}')">Editar</button>
         <button class="btn btn-sm" onclick="deleteVeh('${v.id}')">&#x1F5D1;</button>
       </div>
     </div>`;}).join('')}</div>`;
@@ -869,8 +955,8 @@ function renderEventos(){
       </tr>`;}).join('')}
     </tbody>
     <tfoot><tr>
-      <td colspan="5" style="padding:10px 14px;font-family:var(--mono);font-size:11px;color:var(--txt2);">TOTAL${state.filterTipo?' (filtrado)':''}</td>
-      <td class="td-mono" style="font-weight:500;color:var(--accent)">${fmt(evs.reduce((s,e)=>s+e.total,0))}</td>
+      <td colspan="5" style="padding:11px 15px;font-family:var(--mono);font-size:12px;color:var(--txt2);">TOTAL${state.filterTipo?' (filtrado)':''}</td>
+      <td class="td-mono" style="font-weight:600;color:var(--accent)">${fmt(evs.reduce((s,e)=>s+e.total,0))}</td>
       <td></td>
     </tr></tfoot>
   </table></div>`}`;
@@ -878,18 +964,18 @@ function renderEventos(){
 
 /* AGENDA */
 function renderAgenda(){
-  if(!state.agenda.length)return`<div class="empty"><div class="empty-icon">📅</div><div class="empty-title">Sin alertas configuradas</div><div class="empty-sub">Configurá recordatorios por km o por fecha</div><button class="btn btn-primary" style="margin-top:16px" onclick="openNewAgenda()">+ Nueva alerta</button></div>`;
+  if(!state.agenda.length)return`<div class="empty"><div class="empty-icon">📅</div><div class="empty-title">Sin alertas configuradas</div><div class="empty-sub">Configurá recordatorios por km o por fecha</div><button class="btn btn-primary" style="margin-top:18px" onclick="openNewAgenda()">+ Nueva alerta</button></div>`;
   const items=state.agenda.map(a=>{const veh=getVeh(a.vehId);return{a,veh,s:agendaStatus(a,veh)};}).sort((x,y)=>x.s.level>y.s.level?1:-1);
   return`<div class="table-wrap"><table>
     <thead><tr><th>Estado</th><th>Vehículo</th><th>Servicio</th><th>Último</th><th>Próximo km</th><th>Próxima fecha</th><th>Restante</th><th></th></tr></thead>
     <tbody>${items.map(({a,veh,s})=>`<tr>
       <td>
-        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:${s.level==='due'?'var(--red)':s.level==='warn'?'var(--orange)':'var(--green)'}"></span>
+        <span style="display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;background:${s.level==='due'?'var(--red)':s.level==='warn'?'var(--orange)':'var(--green)'}"></span>
         <span class="text-xs" style="color:${s.level==='due'?'var(--red)':s.level==='warn'?'var(--orange)':'var(--green)'}">${s.level==='due'?'Vencido':s.level==='warn'?'Próximo':'OK'}</span>
       </td>
       <td>${veh?vehIcon(veh.tipo)+' '+esc(veh.marca)+' '+esc(veh.modelo):'—'}</td>
       <td>${esc(a.tipo)}${a.notas?`<div class="text-xs text-muted">${esc(a.notas)}</div>`:''}</td>
-      <td class="td-mono text-sm">${a.kmLast?fmtKm(a.kmLast):'—'}<br><span class="text-xs text-muted">${a.fechaLast?fmtDate(a.fechaLast):'—'}</span></td>
+      <td class="td-mono">${a.kmLast?fmtKm(a.kmLast):'—'}<br><span class="text-xs text-muted">${a.fechaLast?fmtDate(a.fechaLast):'—'}</span></td>
       <td class="td-mono">${a.intervaloKm?fmtKm(s.proxKm):'—'}</td>
       <td class="td-mono">${s.proxFecha?fmtDate(s.proxFecha):'—'}</td>
       <td class="td-mono">
@@ -903,29 +989,42 @@ function renderAgenda(){
 
 /* CONFIG */
 function renderConfig(){
-  return`<div style="max-width:500px;">
-    <div class="section-title" style="margin-bottom:20px;">Configuración</div>
+  const backupEmail=DB.cfg('backup-email','');
+  return`<div style="max-width:540px;">
+    <div class="section-title" style="margin-bottom:22px;">Configuración</div>
+
     <div class="card" style="margin-bottom:16px;">
       <div class="card-title" style="margin-bottom:14px;">Moneda</div>
       <div class="form-group"><label>Símbolo</label><input id="cfg-moneda" value="${esc(DB.cfg('moneda','$'))}" style="max-width:80px;"></div>
       <button class="btn btn-primary" onclick="DB.saveCfg('moneda',document.getElementById('cfg-moneda').value||'$');render()">Guardar</button>
     </div>
+
     <div class="card" style="margin-bottom:16px;">
-      <div class="card-title" style="margin-bottom:14px;">Datos</div>
-      <div class="text-sm text-muted mb-12">Almacenados en localStorage del navegador.</div>
-      <div class="flex gap-8">
-        <button class="btn" onclick="exportData()">&#x2B07; Exportar JSON</button>
-        <button class="btn" onclick="document.getElementById('import-file').click()">&#x2B06; Importar JSON</button>
+      <div class="card-title" style="margin-bottom:12px;">Datos y backup</div>
+      <div class="info-box" style="margin-bottom:16px;">
+        <strong>Tus datos se guardan únicamente en este dispositivo.</strong> Si lo perdés, te lo roban o se rompe, los datos se perderán para siempre. <strong>Hacé backup regularmente.</strong>
+      </div>
+      <div class="form-group">
+        <label>Correo para recordatorio de backup</label>
+        <input id="cfg-email" type="email" value="${esc(backupEmail)}" placeholder="tumail@email.com">
+        <div style="font-size:13px;color:var(--txt3);margin-top:5px;">Al exportar, se abrirá tu app de correo con el archivo listo para adjuntar.</div>
+      </div>
+      <button class="btn btn-sm btn-primary" style="margin-bottom:16px;" onclick="DB.saveCfg('backup-email',document.getElementById('cfg-email').value);alert('Correo guardado.')">Guardar correo</button>
+      <div class="flex gap-8 flex-wrap">
+        <button class="btn" onclick="exportJson()">&#x2B07; Exportar</button>
+        <button class="btn" onclick="exportExcel()">&#x1F4CA; Exportar Excel</button>
+        ${backupEmail?`<button class="btn btn-primary" onclick="enviarBackupEmail()">&#x2709; Enviar por correo</button>`:''}
+        <button class="btn" onclick="document.getElementById('import-file').click()">&#x2B06; Importar</button>
         <input type="file" id="import-file" accept=".json" class="hidden" onchange="importData(event)">
       </div>
     </div>
+
     <div class="card">
-      <div class="card-title" style="margin-bottom:14px;color:var(--red);">Zona de peligro</div>
-      <button class="btn btn-danger" onclick="clearAll()">Borrar todos los datos</button>
+      <button class="btn btn-danger" onclick="clearAll()">&#x1F5D1; Borrar todos los datos</button>
     </div>
   </div>`;
 }
-function exportData(){
+function exportJson(){
   const d=JSON.stringify({vehiculos:state.vehiculos,eventos:state.eventos,agenda:state.agenda,exportedAt:new Date().toISOString()},null,2);
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([d],{type:'application/json'}));a.download='migarage-backup.json';a.click();
 }
@@ -938,12 +1037,12 @@ function importData(ev){
     if(d.eventos)state.eventos=d.eventos;
     else if(d.servicios)state.eventos=d.servicios;
     if(d.agenda)state.agenda=d.agenda;
-    save();renderSidebar();render();alert('Datos importados.');
+    save();renderSidebar();render();alert('Datos importados correctamente.');
   }catch{alert('Archivo inválido.');}};
   r.readAsText(f);
 }
 function clearAll(){
-  confirm('¿Borrar TODOS los datos?',()=>{
+  confirm('¿Borrar TODOS los datos? Esta acción no se puede deshacer.',()=>{
     state.vehiculos=[];state.eventos=[];state.agenda=[];state.currentVeh=null;
     save();renderSidebar();render();
   });
