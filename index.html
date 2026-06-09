@@ -193,8 +193,7 @@ select option{background:var(--bg2);}
 .pwa-banner-text{flex:1;font-size:14px;font-weight:600;}
 .pwa-banner-sub{font-size:12px;opacity:.85;font-weight:400;}
 #pwa-install-fab{display:none;position:fixed;bottom:72px;left:16px;background:var(--accent2);color:#fff;border:none;border-radius:22px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;z-index:490;box-shadow:0 2px 8px rgba(0,0,0,.25);font-family:var(--sans);align-items:center;gap:6px;}
-#pwa-install-fab.show{display:flex;}
-@media(max-width:768px){#pwa-install-fab.show{display:flex;}}
+@media(max-width:768px){#pwa-install-fab{display:flex;}}
 #mobile-nav .mnav-items{display:flex;justify-content:space-around;}
 .mnav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;background:none;border:none;cursor:pointer;color:var(--txt3);font-family:var(--sans);font-size:10px;font-weight:700;transition:color .15s;}
 .mnav-btn.active{color:var(--accent);}
@@ -577,6 +576,35 @@ function save(){
   DB.save('agenda',state.agenda);
   DB.save('deportiva',state.deportiva);
   DB.saveCfg('currentVeh',state.currentVeh||'');
+  autoBackup();
+}
+
+// Descarga silenciosa del backup cada vez que se guarda
+// Usa un debounce de 1.5s para no disparar múltiples descargas seguidas
+let _backupTimer = null;
+function autoBackup(){
+  clearTimeout(_backupTimer);
+  _backupTimer = setTimeout(()=>{
+    try{
+      const d=JSON.stringify({
+        vehiculos:state.vehiculos,
+        eventos:state.eventos,
+        agenda:state.agenda,
+        deportiva:state.deportiva,
+        exportedAt:new Date().toISOString()
+      });
+      const blob=new Blob([d],{type:'application/json'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      const fecha=new Date().toISOString().slice(0,10);
+      a.download=`migarage-backup-${fecha}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+    }catch(e){console.warn('Auto-backup falló:',e);}
+  },1500);
 }
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2);}
 const sym=()=>DB.cfg('moneda','$');
@@ -1328,41 +1356,65 @@ function renderConfig(){
 
 /* PWA INSTALL */
 let _deferredPrompt = null;
+
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   _deferredPrompt = e;
-  const dismissed = localStorage.getItem('mg2_pwa_dismissed');
-  const installed = localStorage.getItem('mg2_pwa_installed');
-  if(installed) return;
-  if(!dismissed) {
-    // First visit: show full banner
+  // si ya fue instalada, ocultar FAB
+  if(localStorage.getItem('mg2_pwa_installed')) {
+    document.getElementById('pwa-install-fab').style.display='none';
+    return;
+  }
+  // mostrar banner completo si nunca se descartó
+  if(!localStorage.getItem('mg2_pwa_dismissed')) {
     document.getElementById('pwa-banner').classList.add('show');
-  } else {
-    // Previously dismissed: show small FAB
-    document.getElementById('pwa-install-fab').classList.add('show');
   }
 });
+
 window.addEventListener('appinstalled', () => {
   localStorage.setItem('mg2_pwa_installed','1');
-  hidePwaBanner();
+  document.getElementById('pwa-banner').classList.remove('show');
+  document.getElementById('pwa-install-fab').style.display='none';
 });
+
 function doInstall(){
-  if(!_deferredPrompt) return;
-  _deferredPrompt.prompt();
-  _deferredPrompt.userChoice.then(r => {
-    if(r.outcome==='accepted') localStorage.setItem('mg2_pwa_installed','1');
-    hidePwaBanner();
-    _deferredPrompt = null;
-  });
+  if(_deferredPrompt) {
+    // Navegador soporta el prompt nativo
+    _deferredPrompt.prompt();
+    _deferredPrompt.userChoice.then(r => {
+      if(r.outcome==='accepted') localStorage.setItem('mg2_pwa_installed','1');
+      hidePwaBanner();
+      _deferredPrompt = null;
+    });
+  } else {
+    // Instrucciones manuales según plataforma
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isSamsung = /samsungbrowser/i.test(navigator.userAgent);
+    if(isIOS) {
+      alert('Para instalar en iPhone/iPad:
+1. Tocá el botón de compartir (□↑) en Safari
+2. Elegí "Agregar a pantalla de inicio"
+3. Tocá "Agregar"');
+    } else if(isSamsung) {
+      alert('Para instalar:
+1. Tocá el menú ⋮ del browser
+2. Elegí "Agregar página a"
+3. Elegí "Pantalla de inicio"');
+    } else {
+      alert('Para instalar:
+1. Tocá el menú ⋮ del browser
+2. Elegí "Instalar aplicación" o "Agregar a pantalla de inicio"');
+    }
+  }
 }
+
 function dismissInstall(){
   localStorage.setItem('mg2_pwa_dismissed','1');
   hidePwaBanner();
-  // Show FAB next time (already set dismissed, so next beforeinstallprompt shows FAB)
 }
+
 function hidePwaBanner(){
   document.getElementById('pwa-banner').classList.remove('show');
-  document.getElementById('pwa-install-fab').classList.remove('show');
 }
 
 load();renderSidebar();render();
