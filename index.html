@@ -187,13 +187,8 @@ select option{background:var(--bg2);}
 @media(max-width:768px){#sidebar{display:none;}#content{padding:16px;padding-bottom:80px;}.form-row,.form-row-3{grid-template-columns:1fr;}.tipo-grid{grid-template-columns:repeat(3,1fr);}.rep-row,.rep-row-hdr{grid-template-columns:1fr 70px 60px 30px;}}
 /* MOBILE BOTTOM NAV */
 #mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);z-index:500;padding:6px 0 env(safe-area-inset-bottom,6px);}
-/* PWA INSTALL BANNER */
-#pwa-banner{display:none;position:fixed;top:0;left:0;right:0;background:var(--accent2);color:#fff;z-index:600;padding:14px 20px;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.3);}
-#pwa-banner.show{display:flex;}
-.pwa-banner-text{flex:1;font-size:14px;font-weight:600;}
-.pwa-banner-sub{font-size:12px;opacity:.85;font-weight:400;}
-#pwa-install-fab{display:none;position:fixed;bottom:72px;left:16px;background:var(--accent2);color:#fff;border:none;border-radius:22px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;z-index:490;box-shadow:0 2px 8px rgba(0,0,0,.25);font-family:var(--sans);align-items:center;gap:6px;}
-@media(max-width:768px){#pwa-install-fab{display:flex;}}
+/* PWA banner removed */
+/* pwa-fab moved inline */
 #mobile-nav .mnav-items{display:flex;justify-content:space-around;}
 .mnav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;background:none;border:none;cursor:pointer;color:var(--txt3);font-family:var(--sans);font-size:10px;font-weight:700;transition:color .15s;}
 .mnav-btn.active{color:var(--accent);}
@@ -239,19 +234,6 @@ select option{background:var(--bg2);}
   <div id="content"></div>
 </div>
 </div>
-
-<!-- PWA INSTALL BANNER -->
-<div id="pwa-banner">
-  <div>
-    <div class="pwa-banner-text">Instalá MiGarage en tu celular</div>
-    <div class="pwa-banner-sub">Acceso rápido desde la pantalla de inicio, sin browser</div>
-  </div>
-  <button class="btn btn-sm" style="background:#fff;color:var(--accent2);border:none;font-weight:700;" onclick="doInstall()">Instalar</button>
-  <button style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:4px;" onclick="dismissInstall()">&#x2715;</button>
-</div>
-
-<!-- FAB INSTALL (mobile, bottom left) -->
-<button id="pwa-install-fab" onclick="doInstall()" title="Instalar app">⬇ Instalar app</button>
 
 <!-- MOBILE BOTTOM NAV -->
 <nav id="mobile-nav">
@@ -1144,10 +1126,13 @@ function renderDashboard(){
 function renderVehiculos(){
   if(!state.vehiculos.length)return`<div class="empty"><div class="empty-icon">🏎</div><div class="empty-title">Sin vehículos registrados</div><button class="btn btn-primary" style="margin-top:16px" onclick="openNewVeh()">+ Nuevo vehículo</button></div>`;
   const isMosaico = state.vehView !== 'lista';
+  const installed = localStorage.getItem('mg2_pwa_installed');
+  const installBtn = !installed ? `<button class="btn btn-sm" onclick="doInstall()" title="Instalar app en el dispositivo" style="gap:5px;">⬇ Instalar</button>` : '';
   const header = `
     <div class="flex items-center justify-between mb-16">
       <div style="font-size:14px;color:var(--txt2);">${state.vehiculos.length} vehículo${state.vehiculos.length!==1?'s':''}</div>
       <div class="flex gap-8">
+        ${installBtn}
         <button class="btn btn-sm ${isMosaico?'btn-primary':''}" onclick="state.vehView='mosaico';render()" title="Mosaico">⊞ Mosaico</button>
         <button class="btn btn-sm ${!isMosaico?'btn-primary':''}" onclick="state.vehView='lista';render()" title="Lista">☰ Lista</button>
       </div>
@@ -1360,61 +1345,33 @@ let _deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   _deferredPrompt = e;
-  // si ya fue instalada, ocultar FAB
-  if(localStorage.getItem('mg2_pwa_installed')) {
-    document.getElementById('pwa-install-fab').style.display='none';
-    return;
-  }
-  // mostrar banner completo si nunca se descartó
-  if(!localStorage.getItem('mg2_pwa_dismissed')) {
-    document.getElementById('pwa-banner').classList.add('show');
-  }
 });
 
 window.addEventListener('appinstalled', () => {
   localStorage.setItem('mg2_pwa_installed','1');
-  document.getElementById('pwa-banner').classList.remove('show');
-  document.getElementById('pwa-install-fab').style.display='none';
+  _deferredPrompt = null;
+  render();
 });
 
 function doInstall(){
   if(_deferredPrompt) {
-    // Navegador soporta el prompt nativo
     _deferredPrompt.prompt();
     _deferredPrompt.userChoice.then(r => {
       if(r.outcome==='accepted') localStorage.setItem('mg2_pwa_installed','1');
-      hidePwaBanner();
       _deferredPrompt = null;
+      render();
     });
   } else {
-    // Instrucciones manuales según plataforma
     const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
     const isSamsung = /samsungbrowser/i.test(navigator.userAgent);
     if(isIOS) {
-      alert('Para instalar en iPhone/iPad:
-1. Tocá el botón de compartir (□↑) en Safari
-2. Elegí "Agregar a pantalla de inicio"
-3. Tocá "Agregar"');
+      alert('Para instalar en iPhone/iPad:\n1. Tocá el botón compartir (□↑) en Safari\n2. Elegí "Agregar a pantalla de inicio"\n3. Tocá "Agregar"');
     } else if(isSamsung) {
-      alert('Para instalar:
-1. Tocá el menú ⋮ del browser
-2. Elegí "Agregar página a"
-3. Elegí "Pantalla de inicio"');
+      alert('Para instalar:\n1. Tocá el menú ⋮ del browser\n2. Elegí "Agregar página a" → "Pantalla de inicio"');
     } else {
-      alert('Para instalar:
-1. Tocá el menú ⋮ del browser
-2. Elegí "Instalar aplicación" o "Agregar a pantalla de inicio"');
+      alert('Para instalar:\n1. Tocá el menú ⋮ del browser\n2. Elegí "Instalar aplicación" o "Agregar a pantalla de inicio"');
     }
   }
-}
-
-function dismissInstall(){
-  localStorage.setItem('mg2_pwa_dismissed','1');
-  hidePwaBanner();
-}
-
-function hidePwaBanner(){
-  document.getElementById('pwa-banner').classList.remove('show');
 }
 
 load();renderSidebar();render();
