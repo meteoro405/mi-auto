@@ -531,7 +531,7 @@ const DB={
   saveCfg(k,v){localStorage.setItem('mg2_cfg_'+k,v);}
 };
 
-let state={vehiculos:[],eventos:[],agenda:[],deportiva:[],currentVeh:null,currentPage:'dashboard',editId:null,filterTipo:null};
+let state={vehiculos:[],eventos:[],agenda:[],deportiva:[],currentVeh:null,currentPage:'dashboard',editId:null,filterTipo:null,vehView:'mosaico'};
 let fotoDataUrl=null;
 
 function load(){
@@ -588,15 +588,20 @@ function updateThemeBtn(){
 }
 
 /* NAV */
-function goTo(page){
+function goTo(page, pushHistory=true){
   state.currentPage=page;
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
   const n=document.getElementById('nav-'+page);if(n)n.classList.add('active');
   // mobile nav sync
   document.querySelectorAll('.mnav-btn').forEach(el=>el.classList.remove('active'));
   const mn=document.getElementById('mnav-'+page);if(mn)mn.classList.add('active');
+  if(pushHistory) history.pushState({page}, '', '#'+page);
   render();
 }
+window.addEventListener('popstate', e=>{
+  const page=(e.state&&e.state.page)||'dashboard';
+  goTo(page, false);
+});
 function selectVehicle(id){
   state.currentVeh=id||null;state.filterTipo=null;
   DB.saveCfg('currentVeh',state.currentVeh||'');
@@ -1021,23 +1026,23 @@ function renderDashboard(){
     :`<div style="width:88px;height:66px;background:var(--bg3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;">${vehIcon(veh.tipo)}</div>`;
   return`
   <div class="card" style="margin-bottom:20px;">
-    <div class="flex items-center gap-12">
+    <div style="display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;">
       ${fotoEl}
-      <div style="flex:1">
+      <div style="min-width:0;">
         <div style="font-size:12px;color:var(--txt3);font-family:var(--mono);text-transform:uppercase;font-weight:500;">${esc(veh.marca)}</div>
-        <div style="font-size:20px;font-weight:700;margin-top:2px;">${esc(veh.modelo)} ${esc(veh.version)}</div>
+        <div style="font-size:19px;font-weight:700;margin-top:2px;line-height:1.25;">${esc(veh.modelo)} ${esc(veh.version)}</div>
         <div class="flex gap-8 mt-8 flex-wrap">
           ${veh.patente?`<span class="badge badge-blue">${esc(veh.patente)}</span>`:''}
           ${veh.anio?`<span class="badge badge-gray">${esc(veh.anio)}</span>`:''}
           <span class="badge ${veh.estado==='activo'?'badge-green':'badge-gray'}">${veh.estado}</span>
         </div>
       </div>
-      <div style="text-align:right;">
-        <div style="font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent);">${fmtKm(veh.kmActual)}</div>
+      <div style="text-align:right;white-space:nowrap;">
+        <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--accent);">${fmtKm(veh.kmActual)}</div>
         <div class="text-xs text-muted">km actuales</div>
-        <div class="flex gap-8 mt-10 items-center km-upd">
-          <input id="km-input-${veh.id}" type="number" value="${veh.kmActual}" style="width:124px;padding:6px 10px;font-size:14px;">
-          <button class="btn btn-sm" onclick="updateKm('${veh.id}')">Actualizar</button>
+        <div style="display:flex;gap:6px;margin-top:8px;align-items:center;justify-content:flex-end;">
+          <input id="km-input-${veh.id}" type="number" value="${veh.kmActual}" style="width:100px;padding:5px 8px;font-size:13px;">
+          <button class="btn btn-sm" onclick="updateKm('${veh.id}')">OK</button>
         </div>
       </div>
     </div>
@@ -1089,30 +1094,67 @@ function renderDashboard(){
 /* VEHICULOS */
 function renderVehiculos(){
   if(!state.vehiculos.length)return`<div class="empty"><div class="empty-icon">🏎</div><div class="empty-title">Sin vehículos registrados</div><button class="btn btn-primary" style="margin-top:16px" onclick="openNewVeh()">+ Nuevo vehículo</button></div>`;
-  return`<div class="grid-3">${state.vehiculos.map(v=>{
-    const evs=evForVeh(v.id);const total=evs.reduce((s,e)=>s+e.total,0);
-    return`<div class="veh-card ${v.id===state.currentVeh?'selected':''}">
-      ${v.foto?`<img class="veh-photo" src="${v.foto}">`:`<div class="veh-photo-ph">${vehIcon(v.tipo)}</div>`}
-      <div class="veh-make">${esc(v.marca)} · ${esc(v.anio)}</div>
-      <div class="veh-name">${esc(v.modelo)} ${esc(v.version)}</div>
-      <div class="flex flex-wrap gap-8 mt-8">
-        ${v.patente?`<span class="badge badge-blue">${esc(v.patente)}</span>`:''}
-        <span class="badge ${v.estado==='activo'?'badge-green':'badge-gray'}">${v.estado}</span>
-        <span class="badge badge-gray">${esc(v.combustible)}</span>
+  const isMosaico = state.vehView !== 'lista';
+  const header = `
+    <div class="flex items-center justify-between mb-16">
+      <div style="font-size:14px;color:var(--txt2);">${state.vehiculos.length} vehículo${state.vehiculos.length!==1?'s':''}</div>
+      <div class="flex gap-8">
+        <button class="btn btn-sm ${isMosaico?'btn-primary':''}" onclick="state.vehView='mosaico';render()" title="Mosaico">⊞ Mosaico</button>
+        <button class="btn btn-sm ${!isMosaico?'btn-primary':''}" onclick="state.vehView='lista';render()" title="Lista">☰ Lista</button>
       </div>
-      <div class="veh-km">${fmtKm(v.kmActual)}</div>
-      <div class="veh-km-lbl">km actuales</div>
-      <div class="sep" style="margin:12px 0;"></div>
-      <div class="flex items-center justify-between text-xs text-muted">
-        <span>${evs.length} evento${evs.length!==1?'s':''}</span>
-        <span>${fmt(total)} total</span>
-      </div>
-      <div class="flex gap-8 mt-12">
-        <button class="btn btn-sm" style="flex:1" onclick="selectVehicle('${v.id}');goTo('dashboard')">Dashboard</button>
-        <button class="btn btn-sm" onclick="openEditVeh('${v.id}')">Editar</button>
-        <button class="btn btn-sm" onclick="deleteVeh('${v.id}')">&#x1F5D1;</button>
-      </div>
-    </div>`;}).join('')}</div>`;
+    </div>`;
+
+  if(isMosaico){
+    return header+`<div class="grid-3">${state.vehiculos.map(v=>{
+      const evs=evForVeh(v.id);const total=evs.reduce((s,e)=>s+e.total,0);
+      return`<div class="veh-card ${v.id===state.currentVeh?'selected':''}">
+        ${v.foto?`<img class="veh-photo" src="${v.foto}">`:`<div class="veh-photo-ph">${vehIcon(v.tipo)}</div>`}
+        <div class="veh-make">${esc(v.marca)} · ${esc(v.anio)}</div>
+        <div class="veh-name">${esc(v.modelo)} ${esc(v.version)}</div>
+        <div class="flex flex-wrap gap-8 mt-8">
+          ${v.patente?`<span class="badge badge-blue">${esc(v.patente)}</span>`:''}
+          <span class="badge ${v.estado==='activo'?'badge-green':'badge-gray'}">${v.estado}</span>
+          <span class="badge badge-gray">${esc(v.combustible)}</span>
+        </div>
+        <div class="veh-km">${fmtKm(v.kmActual)}</div>
+        <div class="veh-km-lbl">km actuales</div>
+        <div class="sep" style="margin:12px 0;"></div>
+        <div class="flex items-center justify-between text-xs text-muted">
+          <span>${evs.length} evento${evs.length!==1?'s':''}</span>
+          <span>${fmt(total)} total</span>
+        </div>
+        <div class="flex gap-8 mt-12">
+          <button class="btn btn-sm" style="flex:1" onclick="selectVehicle('${v.id}');goTo('dashboard')">Dashboard</button>
+          <button class="btn btn-sm" onclick="openEditVeh('${v.id}')">Editar</button>
+          <button class="btn btn-sm" onclick="deleteVeh('${v.id}')">&#x1F5D1;</button>
+        </div>
+      </div>`;}).join('')}</div>`;
+  } else {
+    // VISTA LISTA
+    return header+`<div class="table-wrap"><table>
+      <thead><tr><th></th><th>Vehículo</th><th>Patente</th><th>Km actuales</th><th>Estado</th><th>Eventos</th><th>Gasto total</th><th></th></tr></thead>
+      <tbody>${state.vehiculos.map(v=>{
+        const evs=evForVeh(v.id);const total=evs.reduce((s,e)=>s+e.total,0);
+        return`<tr>
+          <td style="width:48px;">${v.foto?`<img src="${v.foto}" style="width:44px;height:34px;object-fit:cover;border-radius:6px;">`:`<div style="width:44px;height:34px;background:var(--bg3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;">${vehIcon(v.tipo)}</div>`}</td>
+          <td>
+            <div style="font-weight:700;">${esc(v.marca)} ${esc(v.modelo)}</div>
+            <div class="text-xs text-muted">${esc(v.version)} · ${esc(v.anio)}</div>
+          </td>
+          <td>${v.patente?`<span class="badge badge-blue">${esc(v.patente)}</span>`:'—'}</td>
+          <td class="td-mono" style="color:var(--accent);font-weight:700;">${fmtKm(v.kmActual)}</td>
+          <td><span class="badge ${v.estado==='activo'?'badge-green':'badge-gray'}">${v.estado}</span></td>
+          <td class="td-mono">${evs.length}</td>
+          <td class="td-mono">${fmt(total)}</td>
+          <td><div class="flex gap-8">
+            <button class="btn btn-sm" onclick="selectVehicle('${v.id}');goTo('dashboard')">Dashboard</button>
+            <button class="btn btn-sm" onclick="openEditVeh('${v.id}')">Editar</button>
+            <button class="btn btn-sm btn-icon" onclick="deleteVeh('${v.id}')">&#x1F5D1;</button>
+          </div></td>
+        </tr>`;}).join('')}
+      </tbody>
+    </table></div>`;
+  }
 }
 
 /* EVENTOS */
@@ -1274,6 +1316,8 @@ load();renderSidebar();render();
 // sync mobile nav on load
 document.querySelectorAll('.mnav-btn').forEach(el=>el.classList.remove('active'));
 const _mn=document.getElementById('mnav-'+state.currentPage);if(_mn)_mn.classList.add('active');
+// push initial history state so back button works
+history.replaceState({page:state.currentPage},'','#'+state.currentPage);
 </script>
 </body>
 </html>
